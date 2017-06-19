@@ -19,33 +19,30 @@ public class Customer {
     }
 
     public String statement() {
-        double totalRentalAmount = 0;
-        int totalFrequentRenterPoints = 0;
-
         String statementText = "Rental record for " + getCustomerName() + "\n";
-
-        totalFrequentRenterPoints = calculateTotalFrequentRenterPoints(totalFrequentRenterPoints);
-
-        totalRentalAmount = calculateTotalRentalAmount(totalRentalAmount);
 
         for (Rental currentRental : rentals) {
             statementText += "\t" + currentRental.getMovie().getTitle() + "\t" + String.valueOf(calculateCurrentRentalAmount(currentRental)) + "\n";
         }
 
-        statementText += "Amount owed is " + String.valueOf(totalRentalAmount) + "\n";
-        statementText += "You earned " + String.valueOf(totalFrequentRenterPoints) + " frequent renter points";
+        statementText += "Amount owed is " + String.valueOf(calculateTotalRentalAmount()) + "\n";
+        statementText += "You earned " + String.valueOf(calculateTotalFrequentRenterPoints()) + " frequent renter points";
 
         return statementText;
     }
 
-    private double calculateTotalRentalAmount(double totalRentalAmount) {
+    private double calculateTotalRentalAmount() {
+        double totalRentalAmount = 0.0;
+
         for (Rental currentRental : rentals) {
             totalRentalAmount += calculateCurrentRentalAmount(currentRental);
         }
         return totalRentalAmount;
     }
 
-    private int calculateTotalFrequentRenterPoints(int totalFrequentRenterPoints) {
+    private int calculateTotalFrequentRenterPoints() {
+        int totalFrequentRenterPoints = 0;
+
         for (Rental currentRental : rentals) {
             totalFrequentRenterPoints += calculateCurrentFrequentRenterPoints(currentRental);
         }
