@@ -25,12 +25,7 @@ public class Customer {
         String statementText = "Rental record for " + getCustomerName() + "\n";
         for (Rental currentRental : rentals) {
             double currentRentalAmount = calculateCurrentRentalAmount(currentRental);
-
-            // add frequent renter points
-            totalFrequentRenterPoints++;
-            // add bonus for a two day new release rental
-            if (currentRental.getMovie().getPriceCode() == Movie.NEW_RELEASE && currentRental.getDaysRented() > 1)
-                totalFrequentRenterPoints++;
+            totalFrequentRenterPoints += calculateCurrentFrequentRenterPoints(currentRental);
 
             // show figures for this rental
             statementText += "\t" + currentRental.getMovie().getTitle() + "\t" + String.valueOf(currentRentalAmount) + "\n";
@@ -42,6 +37,16 @@ public class Customer {
         statementText += "You earned " + String.valueOf(totalFrequentRenterPoints) + " frequent renter points";
 
         return statementText;
+    }
+
+    private int calculateCurrentFrequentRenterPoints(Rental currentRental) {
+        int totalFrequentRenterPoints = 1;
+
+        // add bonus for a two day new release rental
+        if (currentRental.getMovie().getPriceCode() == Movie.NEW_RELEASE && currentRental.getDaysRented() > 1)
+            totalFrequentRenterPoints++;
+
+        return totalFrequentRenterPoints;
     }
 
     private double calculateCurrentRentalAmount(Rental currentRental) {
