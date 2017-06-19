@@ -44,18 +44,8 @@ public class Customer {
         int totalFrequentRenterPoints = 0;
 
         for (Rental currentRental : rentals) {
-            totalFrequentRenterPoints += calculateCurrentFrequentRenterPoints(currentRental);
+            totalFrequentRenterPoints += currentRental.calculateFrequentRenterPoints();
         }
-        return totalFrequentRenterPoints;
-    }
-
-    private int calculateCurrentFrequentRenterPoints(Rental currentRental) {
-        int totalFrequentRenterPoints = 1;
-
-        // add bonus for a two day new release rental
-        if (currentRental.getMovie().getPriceCode() == Movie.NEW_RELEASE && currentRental.getDaysRented() > 1)
-            totalFrequentRenterPoints++;
-
         return totalFrequentRenterPoints;
     }
 
