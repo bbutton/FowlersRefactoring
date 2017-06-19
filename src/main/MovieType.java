@@ -5,4 +5,8 @@ public abstract class MovieType {
     public abstract int getMovieType();
 
     public abstract double calculateRentalAmount(int daysRented);
+
+    public int calculateFrequentRenterPoints(int daysRented) {
+        return 1;
+    }
 }

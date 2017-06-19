@@ -10,4 +10,15 @@ public class NewReleaseMovieType extends MovieType {
     public double calculateRentalAmount(int daysRented) {
         return daysRented * 3;
     }
+
+    @Override
+    public int calculateFrequentRenterPoints(int daysRented) {
+        int frequentRenterPoints = super.calculateFrequentRenterPoints(daysRented);
+
+        // add bonus for a two day new release rental
+        if (daysRented > 1)
+            frequentRenterPoints++;
+
+        return frequentRenterPoints;
+    }
 }
