@@ -22,7 +22,7 @@ public class Customer {
         String statementText = "Rental record for " + getCustomerName() + "\n";
 
         for (Rental currentRental : rentals) {
-            statementText += "\t" + currentRental.getMovie().getTitle() + "\t" + String.valueOf(calculateCurrentRentalAmount(currentRental)) + "\n";
+            statementText += "\t" + currentRental.getMovie().getTitle() + "\t" + String.valueOf(currentRental.calculateRentalAmount()) + "\n";
         }
 
         statementText += "Amount owed is " + String.valueOf(calculateTotalRentalAmount()) + "\n";
@@ -35,7 +35,7 @@ public class Customer {
         double totalRentalAmount = 0.0;
 
         for (Rental currentRental : rentals) {
-            totalRentalAmount += calculateCurrentRentalAmount(currentRental);
+            totalRentalAmount += currentRental.calculateRentalAmount();
         }
         return totalRentalAmount;
     }
@@ -49,23 +49,4 @@ public class Customer {
         return totalFrequentRenterPoints;
     }
 
-    private double calculateCurrentRentalAmount(Rental currentRental) {
-        double currentRentalAmount = 0;
-        switch (currentRental.getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                currentRentalAmount += 2;
-                if (currentRental.getDaysRented() > 2)
-                    currentRentalAmount += (currentRental.getDaysRented() - 2) * 1.5;
-                break;
-            case Movie.NEW_RELEASE:
-                currentRentalAmount += currentRental.getDaysRented() * 3;
-                break;
-            case Movie.CHILDREN:
-                currentRentalAmount += 1.5;
-                if (currentRental.getDaysRented() > 3)
-                    currentRentalAmount += (currentRental.getDaysRented() - 3) * 1.5;
-                break;
-        }
-        return currentRentalAmount;
-    }
 }
