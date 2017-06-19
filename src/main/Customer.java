@@ -24,22 +24,7 @@ public class Customer {
 
         String statementText = "Rental record for " + getCustomerName() + "\n";
         for (Rental currentRental : rentals) {
-            double currentRentalAmount = 0;
-            switch (currentRental.getMovie().getPriceCode()) {
-                case Movie.REGULAR:
-                    currentRentalAmount += 2;
-                    if (currentRental.getDaysRented() > 2)
-                        currentRentalAmount += (currentRental.getDaysRented() - 2) * 1.5;
-                    break;
-                case Movie.NEW_RELEASE:
-                    currentRentalAmount += currentRental.getDaysRented() * 3;
-                    break;
-                case Movie.CHILDREN:
-                    currentRentalAmount += 1.5;
-                    if (currentRental.getDaysRented() > 3)
-                        currentRentalAmount += (currentRental.getDaysRented() - 3) * 1.5;
-                    break;
-            }
+            double currentRentalAmount = calculateCurrentRentalAmount(currentRental);
 
             // add frequent renter points
             totalFrequentRenterPoints++;
@@ -57,5 +42,25 @@ public class Customer {
         statementText += "You earned " + String.valueOf(totalFrequentRenterPoints) + " frequent renter points";
 
         return statementText;
+    }
+
+    private double calculateCurrentRentalAmount(Rental currentRental) {
+        double currentRentalAmount = 0;
+        switch (currentRental.getMovie().getPriceCode()) {
+            case Movie.REGULAR:
+                currentRentalAmount += 2;
+                if (currentRental.getDaysRented() > 2)
+                    currentRentalAmount += (currentRental.getDaysRented() - 2) * 1.5;
+                break;
+            case Movie.NEW_RELEASE:
+                currentRentalAmount += currentRental.getDaysRented() * 3;
+                break;
+            case Movie.CHILDREN:
+                currentRentalAmount += 1.5;
+                if (currentRental.getDaysRented() > 3)
+                    currentRentalAmount += (currentRental.getDaysRented() - 3) * 1.5;
+                break;
+        }
+        return currentRentalAmount;
     }
 }
