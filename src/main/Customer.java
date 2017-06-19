@@ -25,11 +25,14 @@ public class Customer {
         String statementText = "Rental record for " + getCustomerName() + "\n";
         for (Rental currentRental : rentals) {
             totalFrequentRenterPoints += calculateCurrentFrequentRenterPoints(currentRental);
+        }
 
-            // show figures for this rental
-            statementText += "\t" + currentRental.getMovie().getTitle() + "\t" + String.valueOf(calculateCurrentRentalAmount(currentRental)) + "\n";
-
+        for (Rental currentRental : rentals) {
             totalRentalAmount += calculateCurrentRentalAmount(currentRental);
+        }
+
+        for (Rental currentRental : rentals) {
+            statementText += "\t" + currentRental.getMovie().getTitle() + "\t" + String.valueOf(calculateCurrentRentalAmount(currentRental)) + "\n";
         }
 
         statementText += "Amount owed is " + String.valueOf(totalRentalAmount) + "\n";
