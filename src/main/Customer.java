@@ -24,13 +24,12 @@ public class Customer {
 
         String statementText = "Rental record for " + getCustomerName() + "\n";
         for (Rental currentRental : rentals) {
-            double currentRentalAmount = calculateCurrentRentalAmount(currentRental);
             totalFrequentRenterPoints += calculateCurrentFrequentRenterPoints(currentRental);
 
             // show figures for this rental
-            statementText += "\t" + currentRental.getMovie().getTitle() + "\t" + String.valueOf(currentRentalAmount) + "\n";
+            statementText += "\t" + currentRental.getMovie().getTitle() + "\t" + String.valueOf(calculateCurrentRentalAmount(currentRental)) + "\n";
 
-            totalRentalAmount += currentRentalAmount;
+            totalRentalAmount += calculateCurrentRentalAmount(currentRental);
         }
 
         statementText += "Amount owed is " + String.valueOf(totalRentalAmount) + "\n";
