@@ -6,4 +6,14 @@ public class ChildrensMovieType extends MovieType {
     public int getMovieType() {
         return Movie.CHILDREN;
     }
+
+    @Override
+    public double calculateRentalAmount(int daysRented) {
+        double rentalAmount = 1.5;
+
+        if (daysRented > 3)
+            rentalAmount += (daysRented - 3) * 1.5;
+
+        return rentalAmount;
+    }
 }

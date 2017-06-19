@@ -6,4 +6,8 @@ public class NewReleaseMovieType extends MovieType {
     public int getMovieType() {
         return Movie.NEW_RELEASE;
     }
+
+    public double calculateRentalAmount(int daysRented) {
+        return daysRented * 3;
+    }
 }
