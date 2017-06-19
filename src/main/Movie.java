@@ -5,7 +5,6 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
 
     private String title;
-    private int priceCode;
     private MovieType movieType;
 
     public Movie(String title, int priceCode) {
@@ -15,10 +14,6 @@ public class Movie {
 
     public String getTitle() {
         return title;
-    }
-
-    public int getPriceCode() {
-        return movieType.getMovieType();
     }
 
     public void setPriceCode(int priceCode) {
